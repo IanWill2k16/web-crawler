@@ -7,7 +7,7 @@ import (
 )
 
 func getURLsFromHTML(rawBaseURL, htmlBody string) ([]string, error) {
-	normalizedUrls := []string{}
+	urls := []string{}
 	htmlReader := strings.NewReader(htmlBody)
 	htmlNodes, err := html.Parse(htmlReader)
 	if err != nil {
@@ -19,13 +19,10 @@ func getURLsFromHTML(rawBaseURL, htmlBody string) ([]string, error) {
 		if !strings.Contains(url, "http") {
 			url = rawBaseURL + url
 		}
-		normalURL, err := normalizeURL(url)
-		if err != nil {
-			return nil, err
-		}
-		normalizedUrls = append(normalizedUrls, "https://"+normalURL)
+
+		urls = append(urls, strings.TrimSuffix(url, "/"))
 	}
-	return normalizedUrls, nil
+	return urls, nil
 }
 
 func traverseHTML(htmlNode *html.Node) []string {

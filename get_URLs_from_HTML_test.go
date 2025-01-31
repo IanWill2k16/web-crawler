@@ -44,7 +44,7 @@ func TestGetURLsFromHTML(t *testing.T) {
 </body>
 </html>
 		`,
-			expected: []string{"https://help.example1.com", "https://example2.com/testing/things/with/all/the/things", "https://bluuuuerrrrgh.aaarghhh.example3.com"},
+			expected: []string{"https://help.example1.com", "http://example2.com/testing/things/with/all/the/things", "https://bluuuuerrrrgh.aaarghhh.example3.com"},
 		},
 		{
 			name:     "multitudes of urls",
